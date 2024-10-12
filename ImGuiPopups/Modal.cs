@@ -13,7 +13,7 @@ public partial class ImGuiPopups
 		internal string Title { get; set; } = string.Empty;
 		private bool ShouldOpen { get; set; }
 		private Action OnShowContent { get; set; } = () => { };
-		internal bool WasOpen { get; set; }
+		public bool WasOpen { get; private set; }
 
 		/// <summary>
 		/// Gets the id of the modal window.
