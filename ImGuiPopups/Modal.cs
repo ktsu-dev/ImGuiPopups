@@ -15,7 +15,7 @@ public partial class ImGuiPopups
 		private bool ShouldOpen { get; set; }
 		private Action OnShowContent { get; set; } = () => { };
 		private Vector2 CustomSize { get; set; } = Vector2.Zero;
-		internal bool WasOpen { get; set; }
+		public bool WasOpen { get; private set; }
 
 		/// <summary>
 		/// Gets the id of the modal window.
