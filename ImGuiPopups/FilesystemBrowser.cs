@@ -4,6 +4,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Numerics;
 using System.Text.Json.Serialization;
 using ImGuiNET;
 using ktsu.Extensions;
@@ -44,15 +45,18 @@ public partial class ImGuiPopups
 		private Modal Modal { get; } = new();
 		private MessageOK PopupMessageOK { get; } = new();
 
-		public void FileOpen(string title, Action<AbsoluteFilePath> onChooseFile, string glob = "*") => File(title, FilesystemBrowserMode.Open, onChooseFile, glob);
+		public void FileOpen(string title, Action<AbsoluteFilePath> onChooseFile, string glob = "*") => FileOpen(title, onChooseFile, customSize: Vector2.Zero, glob);
+		public void FileOpen(string title, Action<AbsoluteFilePath> onChooseFile, Vector2 customSize, string glob = "*") => File(title, FilesystemBrowserMode.Open, onChooseFile, customSize, glob);
 
-		public void FileSave(string title, Action<AbsoluteFilePath> onChooseFile, string glob = "*") => File(title, FilesystemBrowserMode.Save, onChooseFile, glob);
+		public void FileSave(string title, Action<AbsoluteFilePath> onChooseFile, string glob = "*") => FileSave(title, onChooseFile, customSize: Vector2.Zero, glob);
+		public void FileSave(string title, Action<AbsoluteFilePath> onChooseFile, Vector2 customSize, string glob = "*") => File(title, FilesystemBrowserMode.Save, onChooseFile, customSize, glob);
 
-		private void File(string title, FilesystemBrowserMode mode, Action<AbsoluteFilePath> onChooseFile, string glob) => OpenPopup(title, mode, FilesystemBrowserTarget.File, onChooseFile, (d) => { }, glob);
+		private void File(string title, FilesystemBrowserMode mode, Action<AbsoluteFilePath> onChooseFile, Vector2 customSize, string glob) => OpenPopup(title, mode, FilesystemBrowserTarget.File, onChooseFile, (d) => { }, customSize, glob);
 
-		public void ChooseDirectory(string title, Action<AbsoluteDirectoryPath> onChooseDirectory) => OpenPopup(title, FilesystemBrowserMode.Open, FilesystemBrowserTarget.Directory, (d) => { }, onChooseDirectory, "*");
+		public void ChooseDirectory(string title, Action<AbsoluteDirectoryPath> onChooseDirectory) => ChooseDirectory(title, onChooseDirectory, customSize: Vector2.Zero);
+		public void ChooseDirectory(string title, Action<AbsoluteDirectoryPath> onChooseDirectory, Vector2 customSize) => OpenPopup(title, FilesystemBrowserMode.Open, FilesystemBrowserTarget.Directory, (d) => { }, onChooseDirectory, customSize, "*");
 
-		private void OpenPopup(string title, FilesystemBrowserMode mode, FilesystemBrowserTarget target, Action<AbsoluteFilePath> onChooseFile, Action<AbsoluteDirectoryPath> onChooseDirectory, string glob)
+		private void OpenPopup(string title, FilesystemBrowserMode mode, FilesystemBrowserTarget target, Action<AbsoluteFilePath> onChooseFile, Action<AbsoluteDirectoryPath> onChooseDirectory, Vector2 customSize, string glob)
 		{
 			FileName = new();
 			BrowserMode = mode;
@@ -65,7 +69,7 @@ public partial class ImGuiPopups
 			Drives.Clear();
 			Environment.GetLogicalDrives().ForEach(Drives.Add);
 			RefreshContents();
-			Modal.Open(title, ShowContent);
+			Modal.Open(title, ShowContent, customSize);
 		}
 
 		/// <summary>

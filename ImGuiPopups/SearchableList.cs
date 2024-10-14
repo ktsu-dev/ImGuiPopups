@@ -1,6 +1,7 @@
 namespace ktsu.ImGuiPopups;
 
 using System;
+using System.Numerics;
 using ImGuiNET;
 using ktsu.CaseConverter;
 using ktsu.FuzzySearch;
@@ -31,7 +32,8 @@ public partial class ImGuiPopups
 		/// <param name="defaultItem">The default value of the input field.</param>
 		/// <param name="getText">A delegate to get the text representation of an item.</param>
 		/// <param name="onConfirm">A callback to handle the new input value.</param>
-		public void Open(string title, string label, IEnumerable<TItem> items, TItem? defaultItem, Func<TItem, string>? getText, Action<TItem> onConfirm)
+		/// <param name="customSize">Custom size of the popup.</param>
+		public void Open(string title, string label, IEnumerable<TItem> items, TItem? defaultItem, Func<TItem, string>? getText, Action<TItem> onConfirm, Vector2 customSize)
 		{
 			searchTerm = string.Empty;
 			Label = label;
@@ -39,8 +41,19 @@ public partial class ImGuiPopups
 			GetText = getText;
 			cachedValue = defaultItem;
 			Items = items;
-			Modal.Open(title, ShowContent);
+			Modal.Open(title, ShowContent, customSize);
 		}
+
+		/// <summary>
+		/// Open the popup and set the title, label, and default value.
+		/// </summary>
+		/// <param name="title">The title of the popup window.</param>
+		/// <param name="label">The label of the input field.</param>
+		/// <param name="items">The items to select from.</param>
+		/// <param name="defaultItem">The default value of the input field.</param>
+		/// <param name="getText">A delegate to get the text representation of an item.</param>
+		/// <param name="onConfirm">A callback to handle the new input value.</param>
+		public void Open(string title, string label, IEnumerable<TItem> items, TItem? defaultItem, Func<TItem, string>? getText, Action<TItem> onConfirm) => Open(title, label, items, defaultItem, getText, onConfirm, Vector2.Zero);
 
 		/// <summary>
 		/// Open the popup and set the title, label, and default value.

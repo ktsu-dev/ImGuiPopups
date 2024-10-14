@@ -1,5 +1,6 @@
 namespace ktsu.ImGuiPopups;
 
+using System.Numerics;
 using ImGuiNET;
 using ktsu.CaseConverter;
 
@@ -24,12 +25,22 @@ public partial class ImGuiPopups
 		/// <param name="label">The label of the input field.</param>
 		/// <param name="defaultValue">The default value of the input field.</param>
 		/// <param name="onConfirm">A callback to handle the new input value.</param>
-		public void Open(string title, string label, TInput defaultValue, Action<TInput> onConfirm)
+		public void Open(string title, string label, TInput defaultValue, Action<TInput> onConfirm) => Open(title, label, defaultValue, onConfirm, customSize: Vector2.Zero);
+
+		/// <summary>
+		/// Open the popup and set the title, label, and default value.
+		/// </summary>
+		/// <param name="title">The title of the popup window.</param>
+		/// <param name="label">The label of the input field.</param>
+		/// <param name="defaultValue">The default value of the input field.</param>
+		/// <param name="onConfirm">A callback to handle the new input value.</param>
+		/// <param name="customSize">Custom size of the popup.</param>
+		public void Open(string title, string label, TInput defaultValue, Action<TInput> onConfirm, Vector2 customSize)
 		{
 			Label = label;
 			OnConfirm = onConfirm;
 			cachedValue = defaultValue;
-			Modal.Open(title, ShowContent);
+			Modal.Open(title, ShowContent, customSize);
 		}
 
 		/// <summary>
