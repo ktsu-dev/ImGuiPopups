@@ -1,4 +1,4 @@
-namespace ktsu.io.ImGuiPopupsDemo;
+namespace ktsu.ImGuiPopupsDemo;
 
 using System.Numerics;
 using ImGuiNET;
