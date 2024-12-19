@@ -4,9 +4,9 @@
     <PackageReference Include="ImGui.NET" Version="1.91.0.1" />
     <PackageReference Include="ktsu.Extensions" Version="1.2.0" />
     <PackageReference Include="ktsu.CaseConverter" Version="1.0.19" />
-    <PackageReference Include="ktsu.ImGuiStyler" Version="1.0.3" />
+    <PackageReference Include="ktsu.ImGuiStyler" Version="1.0.4" />
     <PackageReference Include="ktsu.ScopedAction" Version="1.0.1" />
-    <PackageReference Include="ktsu.StrongPaths" Version="1.1.36" />
+    <PackageReference Include="ktsu.StrongPaths" Version="1.1.37" />
     <PackageReference Include="ktsu.TextFilter" Version="1.0.1" />
     <PackageReference Include="Microsoft.Extensions.FileSystemGlobbing" Version="9.0.0" />
   </ItemGroup>
