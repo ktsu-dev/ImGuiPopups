@@ -4,7 +4,7 @@ using System;
 using System.Numerics;
 using ImGuiNET;
 using ktsu.CaseConverter;
-using ktsu.FuzzySearch;
+using ktsu.TextFilter;
 
 public partial class ImGuiPopups
 {
@@ -96,17 +96,22 @@ public partial class ImGuiPopups
 				}
 			}
 
-			var sortedItems = Items.OrderByDescending(x =>
-			{
-				string itemString = x.ToString() ?? string.Empty;
-				Fuzzy.Contains(itemString, searchTerm, out int score);
-				return score;
-			});
+			var itemLookup = Items.Select(item => (item, itemString: item.ToString() ?? string.Empty))
+				.Where(x => !string.IsNullOrEmpty(x.itemString))
+				.DistinctBy(x => x.itemString)
+				.ToDictionary(x => x.itemString, x => x.item);
+
+			var sortedStrings = TextFilter.Rank(itemLookup.Keys, searchTerm);
 
 			ImGui.BeginListBox("##List");
 			selectedItem = null;
-			foreach (var item in sortedItems)
+			foreach (string itemString in sortedStrings)
 			{
+				if (!itemLookup.TryGetValue(itemString, out var item))
+				{
+					continue;
+				}
+
 				//if nothing has been explicitly selected, select the first item which will be the best match
 				if (selectedItem is null && cachedValue is null)
 				{
