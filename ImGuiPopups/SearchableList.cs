@@ -2,7 +2,9 @@ namespace ktsu.ImGuiPopups;
 
 using System;
 using System.Numerics;
+
 using ImGuiNET;
+
 using ktsu.CaseConverter;
 using ktsu.TextFilter;
 
@@ -125,6 +127,7 @@ public partial class ImGuiPopups
 					cachedValue = item;
 				}
 			}
+
 			ImGui.EndListBox();
 
 			if (ImGui.Button($"OK###{Modal.Title.ToSnakeCase()}_OK"))

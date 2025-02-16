@@ -1,7 +1,9 @@
 namespace ktsu.ImGuiPopupsDemo;
 
 using System.Numerics;
+
 using ImGuiNET;
+
 using ktsu.ImGuiApp;
 using ktsu.ImGuiPopups;
 
@@ -29,34 +31,22 @@ internal class ImGuiPopupsDemo
 	{
 		if (ImGui.Button(inputString))
 		{
-			popupInputString.Open("Enter a string", "Enter", "Yeet", (string result) =>
-			{
-				inputString = result;
-			});
+			popupInputString.Open("Enter a string", "Enter", "Yeet", (string result) => inputString = result);
 		}
 
 		if (ImGui.Button("Open File"))
 		{
-			popupFilesystemBrowser.FileOpen("Open File", (f) =>
-			{
-				popupMessageOK.Open("File Chosen", $"You chose: {f}");
-			}, "*.cs");
+			popupFilesystemBrowser.FileOpen("Open File", (f) => popupMessageOK.Open("File Chosen", $"You chose: {f}"), "*.cs");
 		}
 
 		if (ImGui.Button("Save File"))
 		{
-			popupFilesystemBrowser.FileSave("Save File", (f) =>
-			{
-				popupMessageOK.Open("File Chosen", $"You chose: {f}");
-			}, "*.cs");
+			popupFilesystemBrowser.FileSave("Save File", (f) => popupMessageOK.Open("File Chosen", $"You chose: {f}"), "*.cs");
 		}
 
 		if (ImGui.Button("Choose Best Friend"))
 		{
-			popupSearchableList.Open("Best Friend", "Who is your best friend?", Friends, (string result) =>
-			{
-				popupMessageOK.Open("Best Friend Chosen", $"You chose: {result}");
-			});
+			popupSearchableList.Open("Best Friend", "Who is your best friend?", Friends, (string result) => popupMessageOK.Open("Best Friend Chosen", $"You chose: {result}"));
 		}
 
 		if (ImGui.Button("View Wall Of Text"))

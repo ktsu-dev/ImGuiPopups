@@ -1,7 +1,9 @@
 namespace ktsu.ImGuiPopups;
 
 using System.Numerics;
+
 using ImGuiNET;
+
 using ktsu.CaseConverter;
 
 public partial class ImGuiPopups
@@ -16,6 +18,9 @@ public partial class ImGuiPopups
 		private TInput? cachedValue;
 		private Action<TInput> OnConfirm { get; set; } = null!;
 		private string Label { get; set; } = string.Empty;
+		/// <summary>
+		/// Gets the modal instance used to display the popup input window.
+		/// </summary>
 		protected Modal Modal { get; } = new();
 
 		/// <summary>

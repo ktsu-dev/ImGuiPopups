@@ -4,13 +4,27 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Numerics;
+
 using ImGuiNET;
 
-public partial class ImGuiPopups
+/// <summary>
+/// Contains classes for displaying various popup windows using ImGui.
+/// </summary>
+public static partial class ImGuiPopups
 {
+	/// <summary>
+	/// Defines the layout type for prompt text.
+	/// </summary>
 	public enum PromptTextLayoutType
 	{
+		/// <summary>
+		/// The text is displayed without any formatting.
+		/// </summary>
 		Unformatted,
+
+		/// <summary>
+		/// The text is wrapped based on the popup's size.
+		/// </summary>
 		Wrapped
 	}
 
@@ -19,33 +33,52 @@ public partial class ImGuiPopups
 	/// </summary>
 	public class Prompt
 	{
+		/// <summary>
+		/// Gets the underlying modal instance.
+		/// </summary>
 		private Modal Modal { get; } = new();
+
+		/// <summary>
+		/// Gets or sets the label of the prompt.
+		/// </summary>
 		private string Label { get; set; } = string.Empty;
+
+		/// <summary>
+		/// Gets or sets the dictionary of button labels and their corresponding actions.
+		/// </summary>
 		private Dictionary<string, Action?> Buttons { get; set; } = [];
+
+		/// <summary>
+		/// Gets or sets the text layout type for the prompt.
+		/// </summary>
 		private PromptTextLayoutType TextLayoutType { get; set; }
 
 		/// <summary>
-		/// Open the popup and set the title, label, and button definitions.
+		/// Opens the prompt popup with the specified title, label, and buttons.
 		/// </summary>
 		/// <param name="title">The title of the popup window.</param>
 		/// <param name="label">The label of the input field.</param>
 		/// <param name="buttons">The names and actions of the buttons.</param>
-		public virtual void Open(string title, string label, Dictionary<string, Action?> buttons) => Open(title, label, buttons, customSize: Vector2.Zero);
+		public virtual void Open(string title, string label, Dictionary<string, Action?> buttons)
+			=> Open(title, label, buttons, customSize: Vector2.Zero);
+
 		/// <summary>
-		/// Open the popup and set the title, label, and button definitions.
+		/// Opens the prompt popup with the specified title, label, buttons, and custom size.
 		/// </summary>
 		/// <param name="title">The title of the popup window.</param>
 		/// <param name="label">The label of the input field.</param>
 		/// <param name="buttons">The names and actions of the buttons.</param>
 		/// <param name="customSize">Custom size of the popup.</param>
-		public virtual void Open(string title, string label, Dictionary<string, Action?> buttons, Vector2 customSize) => Open(title, label, buttons, textLayoutType: PromptTextLayoutType.Unformatted, customSize);
+		public virtual void Open(string title, string label, Dictionary<string, Action?> buttons, Vector2 customSize)
+			=> Open(title, label, buttons, textLayoutType: PromptTextLayoutType.Unformatted, customSize);
+
 		/// <summary>
-		/// Open the popup and set the title, label, and button definitions.
+		/// Opens the prompt popup with the specified parameters.
 		/// </summary>
 		/// <param name="title">The title of the popup window.</param>
 		/// <param name="label">The label of the input field.</param>
 		/// <param name="buttons">The names and actions of the buttons.</param>
-		/// <param name="textLayoutType">Which text layout method should be used.</param>
+		/// <param name="textLayoutType">The layout type for the prompt text.</param>
 		/// <param name="size">Custom size of the popup.</param>
 		public void Open(string title, string label, Dictionary<string, Action?> buttons, PromptTextLayoutType textLayoutType, Vector2 size)
 		{
@@ -61,7 +94,7 @@ public partial class ImGuiPopups
 		}
 
 		/// <summary>
-		/// Show the content of the popup.
+		/// Displays the content of the prompt popup based on the text layout type.
 		/// </summary>
 		private void ShowContent()
 		{
@@ -78,6 +111,7 @@ public partial class ImGuiPopups
 				default:
 					throw new NotImplementedException();
 			}
+
 			ImGui.NewLine();
 
 			foreach (var (text, action) in Buttons)
@@ -87,14 +121,15 @@ public partial class ImGuiPopups
 					action?.Invoke();
 					ImGui.CloseCurrentPopup();
 				}
+
 				ImGui.SameLine();
 			}
 		}
 
 		/// <summary>
-		/// Show the modal if it is open.
+		/// Displays the modal if it is open.
 		/// </summary>
-		/// <returns>True if the modal is open.</returns>
+		/// <returns>True if the modal is open; otherwise, false.</returns>
 		public bool ShowIfOpen() => Modal.ShowIfOpen();
 	}
 }
