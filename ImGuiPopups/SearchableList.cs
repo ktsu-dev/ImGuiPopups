@@ -105,30 +105,32 @@ public partial class ImGuiPopups
 
 			var sortedStrings = TextFilter.Rank(itemLookup.Keys, searchTerm);
 
-			ImGui.BeginListBox("##List");
-			selectedItem = null;
-			foreach (string itemString in sortedStrings)
+			if (ImGui.BeginListBox("##List"))
 			{
-				if (!itemLookup.TryGetValue(itemString, out var item))
+				selectedItem = null;
+				foreach (string itemString in sortedStrings)
 				{
-					continue;
+					if (!itemLookup.TryGetValue(itemString, out var item))
+					{
+						continue;
+					}
+
+					//if nothing has been explicitly selected, select the first item which will be the best match
+					if (selectedItem is null && cachedValue is null)
+					{
+						selectedItem = item;
+					}
+
+					string displayText = GetText?.Invoke(item) ?? item.ToString() ?? string.Empty;
+
+					if (ImGui.Selectable(displayText, item == (cachedValue ?? selectedItem)))
+					{
+						cachedValue = item;
+					}
 				}
 
-				//if nothing has been explicitly selected, select the first item which will be the best match
-				if (selectedItem is null && cachedValue is null)
-				{
-					selectedItem = item;
-				}
-
-				string displayText = GetText?.Invoke(item) ?? item.ToString() ?? string.Empty;
-
-				if (ImGui.Selectable(displayText, item == (cachedValue ?? selectedItem)))
-				{
-					cachedValue = item;
-				}
+				ImGui.EndListBox();
 			}
-
-			ImGui.EndListBox();
 
 			if (ImGui.Button($"OK###{Modal.Title.ToSnakeCase()}_OK"))
 			{
