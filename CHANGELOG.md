@@ -1,3 +1,11 @@
+## v1.2.0 (minor)
+
+Changes since v1.1.0:
+
+- Ensure the BeginListBox return value is checked before calling EndListBox ([@matt-edmondson](https://github.com/matt-edmondson))
+- Readd icon ([@matt-edmondson](https://github.com/matt-edmondson))
+- Remove icon to fix LFS ([@matt-edmondson](https://github.com/matt-edmondson))
+
 ## v1.1.1 (patch)
 
 Changes since v1.1.0:
