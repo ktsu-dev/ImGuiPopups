@@ -1,3 +1,9 @@
+## v1.3.2 (patch)
+
+Changes since v1.3.1:
+
+- Update project SDK references to ktsu.Sdk.Lib and ktsu.Sdk.App version 1.8.0 in ImGuiPopups and ImGuiPopupsDemo projects. ([@matt-edmondson](https://github.com/matt-edmondson))
+
 ## v1.3.1 (patch)
 
 Changes since v1.3.0:
