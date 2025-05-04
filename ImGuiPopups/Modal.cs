@@ -1,3 +1,7 @@
+// Copyright (c) ktsu.dev
+// All rights reserved.
+// Licensed under the MIT license.
+
 namespace ktsu.ImGuiPopups;
 
 using System.Numerics;
@@ -77,7 +81,7 @@ public static partial class ImGuiPopups
 				ImGui.OpenPopup(Name);
 			}
 
-			bool result = ImGui.IsPopupOpen(Name);
+			var result = ImGui.IsPopupOpen(Name);
 			if (CustomSize != Vector2.Zero)
 			{
 				ImGui.SetNextWindowSize(CustomSize);

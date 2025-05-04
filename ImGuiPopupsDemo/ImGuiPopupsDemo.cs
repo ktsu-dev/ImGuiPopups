@@ -1,3 +1,7 @@
+// Copyright (c) ktsu.dev
+// All rights reserved.
+// Licensed under the MIT license.
+
 namespace ktsu.ImGuiPopupsDemo;
 
 using System.Numerics;
@@ -52,7 +56,7 @@ internal class ImGuiPopupsDemo
 		if (ImGui.Button("View Wall Of Text"))
 		{
 			#region WallOfTextVariable
-			string message = @"What Is Lorem Ipsum?
+			var message = @"What Is Lorem Ipsum?
 
 Lorem ipsum is a placeholder text used in the graphic, print, and publishing industries to preview layouts and visual mockups. It is a dummy text that is not intended to be read, but rather to fill space on a page and give an idea of how the final design will look.
 

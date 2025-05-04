@@ -1,3 +1,7 @@
+// Copyright (c) ktsu.dev
+// All rights reserved.
+// Licensed under the MIT license.
+
 namespace ktsu.ImGuiPopups;
 
 using System;
@@ -108,7 +112,7 @@ public partial class ImGuiPopups
 			if (ImGui.BeginListBox("##List"))
 			{
 				selectedItem = null;
-				foreach (string itemString in sortedStrings)
+				foreach (var itemString in sortedStrings)
 				{
 					if (!itemLookup.TryGetValue(itemString, out var item))
 					{
@@ -121,7 +125,7 @@ public partial class ImGuiPopups
 						selectedItem = item;
 					}
 
-					string displayText = GetText?.Invoke(item) ?? item.ToString() ?? string.Empty;
+					var displayText = GetText?.Invoke(item) ?? item.ToString() ?? string.Empty;
 
 					if (ImGui.Selectable(displayText, item == (cachedValue ?? selectedItem)))
 					{
