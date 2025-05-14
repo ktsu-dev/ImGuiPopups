@@ -1,6 +1,8 @@
 ## v1.3.3-pre.11 (prerelease)
 
-Incremental prerelease update.
+Changes since v1.3.3-pre.10:
+
+- Update Microsoft.Extensions.FileSystemGlobbing to 9.0.5 ([@dependabot[bot]](https://github.com/dependabot[bot]))
 ## v1.3.3-pre.10 (prerelease)
 
 Changes since v1.3.3-pre.9:
