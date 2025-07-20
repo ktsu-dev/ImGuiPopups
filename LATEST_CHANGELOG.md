@@ -1,5 +1,3 @@
-## v1.3.3 (patch)
+## v1.3.3
 
-Changes since v1.3.2:
-
-- Update project configuration and dependencies ([@matt-edmondson](https://github.com/matt-edmondson))
+No significant changes detected since v1.3.3.
