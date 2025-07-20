@@ -7,7 +7,7 @@ namespace ktsu.ImGuiPopups;
 using System;
 using System.Numerics;
 
-using ImGuiNET;
+using Hexa.NET.ImGui;
 
 using ktsu.CaseConverter;
 using ktsu.TextFilter;
@@ -94,7 +94,7 @@ public partial class ImGuiPopups
 
 			if (ImGui.InputText("##Search", ref searchTerm, 255, ImGuiInputTextFlags.EnterReturnsTrue))
 			{
-				var confirmedItem = cachedValue ?? selectedItem;
+				TItem? confirmedItem = cachedValue ?? selectedItem;
 				if (confirmedItem is not null)
 				{
 					OnConfirm(confirmedItem);
@@ -102,19 +102,19 @@ public partial class ImGuiPopups
 				}
 			}
 
-			var itemLookup = Items.Select(item => (item, itemString: item.ToString() ?? string.Empty))
+			Dictionary<string, TItem> itemLookup = Items.Select(item => (item, itemString: item.ToString() ?? string.Empty))
 				.Where(x => !string.IsNullOrEmpty(x.itemString))
 				.DistinctBy(x => x.itemString)
 				.ToDictionary(x => x.itemString, x => x.item);
 
-			var sortedStrings = TextFilter.Rank(itemLookup.Keys, searchTerm);
+			IEnumerable<string> sortedStrings = TextFilter.Rank(itemLookup.Keys, searchTerm);
 
 			if (ImGui.BeginListBox("##List"))
 			{
 				selectedItem = null;
-				foreach (var itemString in sortedStrings)
+				foreach (string itemString in sortedStrings)
 				{
-					if (!itemLookup.TryGetValue(itemString, out var item))
+					if (!itemLookup.TryGetValue(itemString, out TItem? item))
 					{
 						continue;
 					}
@@ -125,7 +125,7 @@ public partial class ImGuiPopups
 						selectedItem = item;
 					}
 
-					var displayText = GetText?.Invoke(item) ?? item.ToString() ?? string.Empty;
+					string displayText = GetText?.Invoke(item) ?? item.ToString() ?? string.Empty;
 
 					if (ImGui.Selectable(displayText, item == (cachedValue ?? selectedItem)))
 					{
@@ -138,7 +138,7 @@ public partial class ImGuiPopups
 
 			if (ImGui.Button($"OK###{Modal.Title.ToSnakeCase()}_OK"))
 			{
-				var confirmedItem = cachedValue ?? selectedItem;
+				TItem? confirmedItem = cachedValue ?? selectedItem;
 				if (confirmedItem is not null)
 				{
 					OnConfirm(confirmedItem);

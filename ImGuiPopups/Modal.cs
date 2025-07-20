@@ -6,7 +6,7 @@ namespace ktsu.ImGuiPopups;
 
 using System.Numerics;
 
-using ImGuiNET;
+using Hexa.NET.ImGui;
 
 using ktsu.CaseConverter;
 
@@ -81,7 +81,7 @@ public static partial class ImGuiPopups
 				ImGui.OpenPopup(Name);
 			}
 
-			var result = ImGui.IsPopupOpen(Name);
+			bool result = ImGui.IsPopupOpen(Name);
 			if (CustomSize != Vector2.Zero)
 			{
 				ImGui.SetNextWindowSize(CustomSize);

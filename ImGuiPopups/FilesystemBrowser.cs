@@ -11,7 +11,7 @@ using System.Linq;
 using System.Numerics;
 using System.Text.Json.Serialization;
 
-using ImGuiNET;
+using Hexa.NET.ImGui;
 
 using ktsu.Extensions;
 using ktsu.StrongPaths;
@@ -220,8 +220,8 @@ public partial class ImGuiPopups
 			{
 				if (ImGui.BeginCombo("##Drives", Drives[0]))
 				{
-					var currentDrive = CurrentDirectory.Split(Path.VolumeSeparatorChar).First() + Path.VolumeSeparatorChar + Path.DirectorySeparatorChar;
-					foreach (var drive in Drives)
+					string currentDrive = CurrentDirectory.Split(Path.VolumeSeparatorChar).First() + Path.VolumeSeparatorChar + Path.DirectorySeparatorChar;
+					foreach (string drive in Drives)
 					{
 						if (ImGui.Selectable(drive, drive == currentDrive))
 						{
@@ -244,14 +244,14 @@ public partial class ImGuiPopups
 					//ImGui.TableSetupColumn("Modified", ImGuiTableColumnFlags.None, 3);
 					ImGui.TableHeadersRow();
 
-					var flags = ImGuiSelectableFlags.SpanAllColumns | ImGuiSelectableFlags.AllowDoubleClick | ImGuiSelectableFlags.NoAutoClosePopups;
+					ImGuiSelectableFlags flags = ImGuiSelectableFlags.SpanAllColumns | ImGuiSelectableFlags.AllowDoubleClick | ImGuiSelectableFlags.NoAutoClosePopups;
 					ImGui.TableNextRow();
 					ImGui.TableNextColumn();
 					if (ImGui.Selectable("..", false, flags))
 					{
 						if (ImGui.IsMouseDoubleClicked(0))
 						{
-							var newPath = Path.GetDirectoryName(CurrentDirectory.WeakString.Trim(Path.DirectorySeparatorChar));
+							string? newPath = Path.GetDirectoryName(CurrentDirectory.WeakString.Trim(Path.DirectorySeparatorChar));
 							if (newPath is not null)
 							{
 								CurrentDirectory = (AbsoluteDirectoryPath)newPath;
@@ -260,13 +260,13 @@ public partial class ImGuiPopups
 						}
 					}
 
-					foreach (var path in CurrentContents.OrderBy(p => p is not AbsoluteDirectoryPath).ThenBy(p => p).ToCollection())
+					foreach (AnyAbsolutePath? path in CurrentContents.OrderBy(p => p is not AbsoluteDirectoryPath).ThenBy(p => p).ToCollection())
 					{
 						ImGui.TableNextRow();
 						ImGui.TableNextColumn();
-						var directory = path as AbsoluteDirectoryPath;
-						var file = path as AbsoluteFilePath;
-						var displayPath = path.WeakString;
+						AbsoluteDirectoryPath? directory = path as AbsoluteDirectoryPath;
+						AbsoluteFilePath? file = path as AbsoluteFilePath;
+						string displayPath = path.WeakString;
 						displayPath = displayPath.RemovePrefix(CurrentDirectory).Trim(Path.DirectorySeparatorChar);
 
 						if (directory is not null)
@@ -310,7 +310,7 @@ public partial class ImGuiPopups
 				FileName = (FileName)fileName;
 			}
 
-			var confirmText = BrowserMode switch
+			string confirmText = BrowserMode switch
 			{
 				FilesystemBrowserMode.Open => "Open",
 				FilesystemBrowserMode.Save => "Save",
@@ -337,7 +337,7 @@ public partial class ImGuiPopups
 		{
 			if (BrowserTarget == FilesystemBrowserTarget.File)
 			{
-				var chosenFile = CurrentDirectory / FileName;
+				AbsoluteFilePath chosenFile = CurrentDirectory / FileName;
 				if (!Matcher.Match(FileName).HasMatches)
 				{
 					PopupMessageOK.Open("Invalid File Name", "The file name does not match the glob pattern.");

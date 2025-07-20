@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Numerics;
 
-using ImGuiNET;
+using Hexa.NET.ImGui;
 
 /// <summary>
 /// Contains classes for displaying various popup windows using ImGui.
@@ -118,7 +118,7 @@ public static partial class ImGuiPopups
 
 			ImGui.NewLine();
 
-			foreach (var (text, action) in Buttons)
+			foreach ((string text, Action? action) in Buttons)
 			{
 				if (ImGui.Button(text))
 				{

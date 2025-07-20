@@ -1,14 +1,14 @@
-<Project Sdk="ktsu.Sdk.Lib/1.8.0">
+﻿<Project Sdk = "ktsu.Sdk.Lib">
 
   <ItemGroup>
-    <PackageReference Include="ImGui.NET" Version="1.91.6.1" />
-    <PackageReference Include="ktsu.Extensions" Version="1.5.5" />
-    <PackageReference Include="ktsu.CaseConverter" Version="1.3.2" />
-    <PackageReference Include="ktsu.ImGuiStyler" Version="1.3.2" />
-    <PackageReference Include="ktsu.ScopedAction" Version="1.1.2" />
-    <PackageReference Include="ktsu.StrongPaths" Version="1.3.2" />
-    <PackageReference Include="ktsu.TextFilter" Version="1.5.3" />
-    <PackageReference Include="Microsoft.Extensions.FileSystemGlobbing" Version="9.0.7" />
+    <PackageReference Include = "Hexa.NET.ImGui" />
+    <PackageReference Include = "ktsu.Extensions" />
+    <PackageReference Include = "ktsu.CaseConverter" />
+    <PackageReference Include = "ktsu.ImGuiStyler" />
+    <PackageReference Include = "ktsu.ScopedAction" />
+    <PackageReference Include = "ktsu.StrongPaths" />
+    <PackageReference Include = "ktsu.TextFilter" />
+    <PackageReference Include = "Microsoft.Extensions.FileSystemGlobbing" />
   </ItemGroup>
 
 </Project>
