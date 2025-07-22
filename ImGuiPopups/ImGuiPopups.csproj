@@ -4,7 +4,6 @@
     <PackageReference Include = "Hexa.NET.ImGui" />
     <PackageReference Include = "ktsu.Extensions" />
     <PackageReference Include = "ktsu.CaseConverter" />
-    <PackageReference Include = "ktsu.ImGuiStyler" />
     <PackageReference Include = "ktsu.ScopedAction" />
     <PackageReference Include = "ktsu.StrongPaths" />
     <PackageReference Include = "ktsu.TextFilter" />
