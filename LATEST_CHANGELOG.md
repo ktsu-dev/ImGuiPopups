@@ -1,5 +1,3 @@
-## v1.3.5 (patch)
+## v1.3.5
 
-Changes since v1.3.4:
-
-- Remove ktsu.ImGuiStyler package reference ([@matt-edmondson](https://github.com/matt-edmondson))
+No significant changes detected since v1.3.5.
