@@ -1,5 +1,5 @@
-## v1.3.4 (patch)
+## v1.3.5 (patch)
 
-Changes since v1.3.3:
+Changes since v1.3.4:
 
-- [patch] Force patch ([@matt-edmondson](https://github.com/matt-edmondson))
+- Remove ktsu.ImGuiStyler package reference ([@matt-edmondson](https://github.com/matt-edmondson))
