@@ -7,7 +7,6 @@ namespace ktsu.ImGuiPopups;
 using System.Numerics;
 
 using Hexa.NET.ImGui;
-
 using ktsu.CaseConverter;
 
 public partial class ImGuiPopups
